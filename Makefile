@@ -1,8 +1,18 @@
 run-docker-image-build:
+	$(eval DEXIST := $(shell command -v docker))
+	$(eval DCEXIST := $(shell command -v docker-compose))
+
+	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
+	@ test -n "$(DCEXIST)" || sh -c 'echo "No docker-compose binary installed" && exit 1'
 	@ docker build -f=./docker/Dockerfile --tag prakasa1904/dvt-edutech .
 	@ docker push prakasa1904/dvt-edutech:latest
 
 run-dev:
+	$(eval DEXIST := $(shell command -v docker))
+	$(eval DCEXIST := $(shell command -v docker-compose))
+
+	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
+	@ test -n "$(DCEXIST)" || sh -c 'echo "No docker-compose binary installed" && exit 1'
 	@ docker-compose -f docker/dev.docker-compose.yml up
 
 run-update:
