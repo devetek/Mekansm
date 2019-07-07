@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
+import { MemberService } from '@models/account/index';
 import { ListPage } from './list.page';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ListPage } from './list.page';
       }
     ])
   ],
-  declarations: [ListPage]
+  declarations: [ListPage],
+  providers: [MemberService],
 })
 export class ListPageModule {}
