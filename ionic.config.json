@@ -1,0 +1,7 @@
+{
+  "name": "hompes-angular",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
