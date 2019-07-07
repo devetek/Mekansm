@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  mekansm_app:
+    image: prakasa1904/dvt-edutech
+    container_name: mekansm_app
+    working_dir: /devetek/
+    volumes:
+      - ../src:/devetek/src
+    restart: always
+    command: sh -c "npm run-script start"
+    ports:
+      - 4200:4200
