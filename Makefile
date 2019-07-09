@@ -1,18 +1,53 @@
-run-docker-image-build:
+
+export CCFLAGS
+export IS_WINDOWS=false
+
+ifeq ($(OS),Windows_NT)
+		IS_WINDOWS = true
+    CCFLAGS += -D WIN32
+    ifeq ($(PROCESSOR_ARCHITEW6432),AMD64)
+        CCFLAGS += -D AMD64
+    else
+        ifeq ($(PROCESSOR_ARCHITECTURE),AMD64)
+            CCFLAGS += -D AMD64
+        endif
+        ifeq ($(PROCESSOR_ARCHITECTURE),x86)
+            CCFLAGS += -D IA32
+        endif
+    endif
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        CCFLAGS += -D LINUX
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        CCFLAGS += -D OSX
+    endif
+    UNAME_P := $(shell uname -p)
+    ifeq ($(UNAME_P),x86_64)
+        CCFLAGS += -D AMD64
+    endif
+    ifneq ($(filter %86,$(UNAME_P)),)
+        CCFLAGS += -D IA32
+    endif
+    ifneq ($(filter arm%,$(UNAME_P)),)
+        CCFLAGS += -D ARM
+    endif
+endif
+
+run-validate:
 	$(eval DEXIST := $(shell command -v docker))
 	$(eval DCEXIST := $(shell command -v docker-compose))
 
+	@ test "$(IS_WINDOWS)" == "false" || sh -c 'echo "OS is Windows, script not support yet" && exit 1'
 	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
 	@ test -n "$(DCEXIST)" || sh -c 'echo "No docker-compose binary installed" && exit 1'
+
+run-docker-image-build: run-validate
 	@ docker build -f=./docker/Dockerfile --tag prakasa1904/dvt-edutech .
 	@ docker push prakasa1904/dvt-edutech:latest
 
-run-dev:
-	$(eval DEXIST := $(shell command -v docker))
-	$(eval DCEXIST := $(shell command -v docker-compose))
-
-	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
-	@ test -n "$(DCEXIST)" || sh -c 'echo "No docker-compose binary installed" && exit 1'
+run-dev: run-validate
 	@ docker-compose -f docker/dev.docker-compose.yml up
 
 run-update:
