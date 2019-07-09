@@ -30,6 +30,23 @@
         "tool",
         "tutorial"
       ]
+    },
+    {
+      "login": "kusumaindraputra",
+      "name": "Kusuma Putra",
+      "avatar_url": "https://assets.gitlab-static.net/uploads/-/system/user/avatar/4078065/avatar.png",
+      "profile": "https://gitlab.com/kusumaindraputra",
+      "contributions": [
+        "bug",
+        "business",
+        "content",
+        "design",
+        "doc",
+        "eventOrganizing",
+        "projectManagement",
+        "translation",
+        "userTesting"
+      ]
     }
   ],
   "contributorsPerLine": 7
