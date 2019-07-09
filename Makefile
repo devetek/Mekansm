@@ -39,7 +39,7 @@ run-validate:
 	$(eval DEXIST := $(shell command -v docker))
 	$(eval DCEXIST := $(shell command -v docker-compose))
 
-	@ test "$(IS_WINDOWS)" == "false" || sh -c 'echo "OS is Windows, script not support yet" && exit 1'
+	@ test "$(IS_WINDOWS)" == "false" || sh -c 'echo "Fucker!, you still using windows in $(shell date +%Y)!" && exit 1'
 	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
 	@ test -n "$(DCEXIST)" || sh -c 'echo "No docker-compose binary installed" && exit 1'
 
