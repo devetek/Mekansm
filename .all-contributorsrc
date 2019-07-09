@@ -1,0 +1,36 @@
+{
+  "projectName": "mekansm",
+  "projectOwner": "devetek",
+  "repoType": "gitlab",
+  "repoHost": "https://gitlab.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "prakasa1904",
+      "name": "Prakasa",
+      "avatar_url": "https://assets.gitlab-static.net/uploads/-/system/user/avatar/1601697/avatar.png",
+      "profile": "https://gitlab.com/prakasa1904",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "ideas",
+        "infra",
+        "maintenance",
+        "platform",
+        "plugin",
+        "review",
+        "security",
+        "test",
+        "tool",
+        "tutorial"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
