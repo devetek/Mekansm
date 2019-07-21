@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { MemberService } from '@models/account/index';
+import { HeaderComponent } from '@components/heeader/component';
 import { ListPage } from './list.page';
 
 @NgModule({
@@ -16,10 +17,14 @@ import { ListPage } from './list.page';
       {
         path: '',
         component: ListPage
+      },
+      {
+        path: 'filter/:id',
+        component: ListPage
       }
     ])
   ],
-  declarations: [ListPage],
+  declarations: [HeaderComponent, ListPage],
   providers: [MemberService],
 })
 export class ListPageModule {}
