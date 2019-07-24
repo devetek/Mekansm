@@ -6,8 +6,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import { GlobalService } from '@services/globals';
 import { RequestService } from '@services/request';
 import { AppComponent } from './app.component';
+import { HeaderModule } from '@components/heeader/module';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
@@ -17,11 +19,13 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    HeaderModule,
     AppRoutingModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    GlobalService,
     RequestService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

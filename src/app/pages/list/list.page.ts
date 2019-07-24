@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { GlobalService } from '@services/globals';
 import { MemberService } from '@models/account/index';
 import { Members } from '@models/account/member';
 
@@ -13,10 +14,11 @@ export class ListPage implements OnInit {
   public hasNext = false;
   public results: Members = { data: [], hasNext: false };
 
-  constructor(private memberService: MemberService) {}
+  constructor(private memberService: MemberService, private globalService: GlobalService) {}
 
   ngOnInit() {
     this.loading = true;
+    this.globalService.setTitle('List Page');
 
     this.memberService.getMembers().subscribe(response => {
       this.loading = false;

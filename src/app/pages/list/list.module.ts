@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { MemberService } from '@models/account/index';
-import { HeaderComponent } from '@components/heeader/component';
+import { HeaderModule } from '@components/heeader/module';
 import { ListPage } from './list.page';
 
 @NgModule({
@@ -13,6 +13,7 @@ import { ListPage } from './list.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    HeaderModule,
     RouterModule.forChild([
       {
         path: '',
@@ -24,7 +25,7 @@ import { ListPage } from './list.page';
       }
     ])
   ],
-  declarations: [HeaderComponent, ListPage],
+  declarations: [ListPage],
   providers: [MemberService],
 })
 export class ListPageModule {}
