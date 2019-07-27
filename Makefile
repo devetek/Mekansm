@@ -36,8 +36,8 @@ else
 endif
 
 run-validate:
-	$(eval DEXIST := $(shell command -v docker))
-	$(eval DCEXIST := $(shell command -v docker-compose))
+	$(eval DEXIST := $(shell which docker))
+	$(eval DCEXIST := $(shell which docker-compose))
 
 	@ test "$(IS_WINDOWS)" == "false" || sh -c 'echo "Fucker!, you still using windows in $(shell date +%Y)!" && exit 1'
 	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
