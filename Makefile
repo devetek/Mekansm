@@ -1,4 +1,3 @@
-
 export CCFLAGS
 export IS_WINDOWS=false
 
@@ -35,20 +34,12 @@ else
     endif
 endif
 
-run-validate:
-	$(eval DEXIST := $(shell which docker))
-	$(eval DCEXIST := $(shell which docker-compose))
-
-	@ test "$(IS_WINDOWS)" == "false" || sh -c 'echo "Fucker!, you still using windows in $(shell date +%Y)!" && exit 1'
-	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
-	@ test -n "$(DCEXIST)" || sh -c 'echo "No docker-compose binary installed" && exit 1'
-
-run-docker-image-build: run-validate
+run-docker-image-build: .validate
 	@ docker build -f=./docker/Dockerfile --tag prakasa1904/dvt-edutech .
 	@ docker push prakasa1904/dvt-edutech:latest
 
-run-dev: run-validate
-	@ docker-compose -f docker/dev.docker-compose.yml up
+run-dev: .validate
+	@ docker-compose -f docker/dev.docker-compose.yml down && docker-compose -f docker/dev.docker-compose.yml up
 
 run-update:
 	# update when using custom plugin, like cordova
@@ -77,3 +68,11 @@ run-build-android:
 run-build-desktop:
 	@ npx cap add electron
 	@ npx cap sync
+
+.validate:
+	$(eval DEXIST := $(shell which docker))
+	$(eval DCEXIST := $(shell which docker-compose))
+
+	@ test "$(IS_WINDOWS)" == "false" || sh -c 'echo "Fucker!, you still using windows in $(shell date +%Y)!" && exit 1'
+	@ test -n "$(DEXIST)" || sh -c 'echo "No docker binary installed" && exit 1'
+	@ test -n "$(DCEXIST)" || sh -c 'echo "No docker-compose binary installed" && exit 1'
